@@ -9,8 +9,6 @@ import 'element-ui/lib/theme-chalk/index.css';
 
 Vue.config.productionTip = false;
 
-axios.defaults.baseURL='https://api.watchdog.hmny.io/';
-
 Vue.use(VueAxios, axios);
 Vue.use(ElementUI);
 
