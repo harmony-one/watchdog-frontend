@@ -447,8 +447,9 @@ export default class HomeView extends Vue {
   protected versionTitle: string = "";
   protected baseConfig: BaseConfig = {chainId: 2, network: "testnet"};
   protected networkOptions: Array<NetworkOptions> = [
+    {label: "Mainnet", value: "mainnet"},
+    {label: "Testnet", value: "testnet"},
     {label: "Devnet", value: "devnet"},
-    {label: "Testnet", value: "testnet"}
   ];
   protected shardSummarySet: Array<ShardSummary> = [];
   protected shardConfigSet: Array<ShardConfig> = [];
@@ -593,7 +594,7 @@ export default class HomeView extends Vue {
     return new Promise((resolve, reject) => {
       this.isWalletConnecting = true;
 
-      this.axios.post(this.baseConfig.network+'/login', loginData).then((response) => {
+      this.axios.post(this.getEndpointHost(this.baseConfig.network)+'/login', loginData).then((response) => {
         if (response.status == 200 && response.data.token) {
           return resolve(response.data)
         } else {
@@ -642,7 +643,7 @@ export default class HomeView extends Vue {
         background: 'rgba(0, 0, 0, 0.7)'
       });
 
-      this.axios.get(this.baseConfig.network+'/user/network', {
+      this.axios.get(this.getEndpointHost(this.baseConfig.network)+'/user/network', {
         headers: {"Authorization": "Bearer " + this.userToken},
       }).then((response) => {
         return resolve(response)
@@ -878,6 +879,17 @@ export default class HomeView extends Vue {
 
   private blskey2short(key: string): string {
     return key.slice(0, 3) + "..." + key.slice(-3);
+  }
+
+  private getEndpointHost(network: string): string {
+    switch (network) {
+      case "mainnet":
+        return "https://api.watchdog.t.hmny.io/"+network
+      case "testnet":
+      case "devnet":
+      default:
+        return "https://api.watchdog.b.hmny.io/"+network
+    }
   }
 }
 </script>
