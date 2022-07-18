@@ -447,8 +447,9 @@ export default class HomeView extends Vue {
   protected versionTitle: string = "";
   protected baseConfig: BaseConfig = {chainId: 2, network: "testnet"};
   protected networkOptions: Array<NetworkOptions> = [
+    {label: "Mainnet", value: "mainnet"},
+    {label: "Testnet", value: "testnet"},
     {label: "Devnet", value: "devnet"},
-    {label: "Testnet", value: "testnet"}
   ];
   protected shardSummarySet: Array<ShardSummary> = [];
   protected shardConfigSet: Array<ShardConfig> = [];
