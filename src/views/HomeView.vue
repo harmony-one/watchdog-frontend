@@ -46,7 +46,7 @@
             <p><span>DNS Zone:</span><span>{{ shardConfigSet[shardId].dNSZone }}</span></p>
             <p v-if="shardId === 0"><span>Blocks To Next Epoch:</span><span>{{ summary.blocksToNextEpoch }}</span></p>
             <p v-else><span>Blocks To Next Epoch:</span><span>-</span></p>
-            <p><span>Last Crosslink:</span><span>last-crosslink</span></p>
+            <p><span>Last Crosslink:</span><span>{{ summary.lastCrosslink }}</span></p>
             <el-link class="link-anchor" @click.prevent="anchor('current-committee-'+shardId)">
               <span>{{ superCommitteeCurrentSet[shardId].externalValidatorSlotCount }}</span> Current Committee
             </el-link>
@@ -687,6 +687,7 @@ export default class HomeView extends Vue {
         epochMin: blockHeader[shardId]["epoch-min"],
         pendingCrossLinksCount: blockHeader[shardId]["pending-cross-links-count"] ? blockHeader[shardId]["pending-cross-links-count"] : "-",
         pendingCxCount: blockHeader[shardId]["pending-cx-count"],
+        lastCrosslink: blockHeader[shardId]["last-crosslink"] ? blockHeader[shardId]["last-crosslink"] : "-",
         leader: shardLeader,
         signPower: blockHeader[shardId]["sign-power"] * 100 + "%",
         uniqBlocks: blockHeader[shardId]["uniq-blocks"],
