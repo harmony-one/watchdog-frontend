@@ -34,6 +34,7 @@ interface ShardSummary {
     uniqBlocks: number[];
     uniqEpochs: number[];
     nodeCount: number;
+    lastCrosslink: number;
 }
 
 interface ShardConfig {
